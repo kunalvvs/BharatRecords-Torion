@@ -1,0 +1,119 @@
+.pan-card-page {
+  min-height: 100vh;
+  background-color: var(--bg-white);
+  padding-bottom: var(--spacing-2xl);
+}
+
+.upload-section {
+  padding: var(--spacing-xl) var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.upload-area {
+  border: 3px dashed #999;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-3xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  background-color: #FAFAFA;
+  min-height: 280px;
+  justify-content: center;
+}
+
+.upload-icon {
+  margin-bottom: var(--spacing-lg);
+}
+
+.upload-hint {
+  font-size: 14px;
+  color: var(--text-purple);
+  font-weight: 600;
+}
+
+.btn-attach-document {
+  padding: var(--spacing-lg);
+  background-color: var(--bg-white);
+  border: 2px solid #00A8E8;
+  color: #00A8E8;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+.plus-icon {
+  font-size: 24px;
+}
+
+.btn-submit-purple {
+  padding: var(--spacing-lg);
+  background-color: var(--primary-purple);
+  color: var(--text-white);
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: var(--radius-xl);
+}
+
+.uploaded-docs-section {
+  padding: 0 var(--spacing-lg);
+}
+
+.uploaded-docs-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.uploaded-doc-card {
+  background-color: #F5F5F5;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.doc-pdf-icon {
+  flex-shrink: 0;
+}
+
+.pdf-icon-wrapper {
+  width: 60px;
+  height: 60px;
+}
+
+.doc-info {
+  flex: 1;
+}
+
+.doc-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.doc-date {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.doc-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.action-btn-edit,
+.action-btn-delete,
+.action-btn-download {
+  background: none;
+  padding: 0;
+}

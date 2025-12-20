@@ -1,0 +1,114 @@
+.my-account-page {
+  min-height: 100vh;
+  background: #F5F5F5;
+  padding-bottom: 20px;
+}
+
+.account-content {
+  padding: 20px;
+}
+
+.profile-avatar {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.avatar-circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 3px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.account-form {
+  margin-top: 30px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 15px;
+}
+
+.form-label {
+  color: #3D1F8F;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 140px;
+  flex-shrink: 0;
+}
+
+.form-input-field {
+  flex: 1;
+  padding: 12px 20px;
+  border: 2px solid #3D1F8F;
+  border-radius: 50px;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.form-input-field.editable {
+  border-color: #3D1F8F;
+}
+
+.form-input-field:focus {
+  border-color: #3D1F8F;
+}
+
+.update-phone-btn,
+.update-email-btn {
+  padding: 12px 30px;
+  background: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.update-phone-btn:hover,
+.update-email-btn:hover {
+  background: #1976D2;
+}
+
+.navigation-links {
+  margin-top: 30px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.nav-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  border-bottom: 1px solid #F0F0F0;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.nav-link:last-child {
+  border-bottom: none;
+}
+
+.nav-link:hover {
+  background: #F8F8F8;
+}
+
+.nav-label {
+  color: #3D1F8F;
+  font-size: 15px;
+  font-weight: 600;
+}
