@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import SplashScreen from './pages/SplashScreen'
 import LoginPage from './pages/LoginPage'
+import PhoneLoginPage from './pages/PhoneLoginPage'
 import OTPPage from './pages/OTPPage'
 import SignupPage from './pages/SignupPage'
 import HomePage from './pages/HomePage'
@@ -56,6 +57,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SplashScreen />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/phone-login" element={<PhoneLoginPage />} />
         <Route path="/otp" element={<OTPPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/home" element={<HomePage />} />

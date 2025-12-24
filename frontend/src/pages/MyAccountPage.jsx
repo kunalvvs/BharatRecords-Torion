@@ -109,7 +109,7 @@ function MyAccountPage() {
             />
           </div>
 
-          <button className="update-phone-btn">Update Phone Number</button>
+          <button className="update-phone-btn" onClick={() => navigate('/update-phone-otp')}>Update Phone Number</button>
 
           <div className="form-row">
             <label className="form-label">Email : ✏️</label>
@@ -122,7 +122,7 @@ function MyAccountPage() {
             />
           </div>
 
-          <button className="update-email-btn">Update Email</button>
+          <button className="update-email-btn" onClick={() => navigate('/update-phone-otp')}>Update Email</button>
         </div>
 
         <div className="navigation-links">
