@@ -92,7 +92,8 @@
 }
 
 .btn-primary {
-  background: var(--primary-purple);
+  /* background: var(--primary-purple); */
+  background-color: #1565C0;
   color: white;
   border: none;
   border-radius: 12px;
