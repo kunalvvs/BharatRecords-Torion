@@ -64,9 +64,7 @@ function DocumentUploadTemplate({ title, icon, documentType }) {
               <div className="doc-info">
                 <p className="doc-name">Name : {doc.name}</p>
                 <p className="doc-date">Date : {doc.date}</p>
-              </div>
-
-              <div className="doc-actions">
+                 <div className="doc-actions">
                 <button className="action-btn-edit">
                   <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                     <circle cx="20" cy="20" r="20" fill="white"/>
@@ -91,6 +89,9 @@ function DocumentUploadTemplate({ title, icon, documentType }) {
                   </svg>
                 </button>
               </div>
+              </div>
+
+             
             </div>
           ))}
         </div>

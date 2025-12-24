@@ -7,12 +7,16 @@
   background-color: var(--primary-purple);
   color: var(--text-white);
   padding: var(--spacing-lg);
+  
 }
 
 .page-header-purple h1 {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 300;
+  
 }
+
+
 
 .amount-display {
   background-color: var(--bg-light);

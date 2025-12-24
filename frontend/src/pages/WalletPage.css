@@ -15,15 +15,16 @@
 
 .wallet-header h1 {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .wallet-icon {
   width: 40px;
   height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+  
+  
 }
 
 .balance-section {
@@ -50,52 +51,43 @@
   grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-lg);
   padding: 0 var(--spacing-sm);
+  
 }
 
-.action-btn {
-  background: linear-gradient(135deg, #C8BAEB 0%, #B8A8E8 100%);
+
+.action-btn1{
+  
   color: var(--text-white);
-  padding: var(--spacing-xl) var(--spacing-md);
-  border: none;
-  border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-md);
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(155, 135, 214, 0.3);
+  padding: 5px 0;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.307);
+
 }
 
-.action-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(155, 135, 214, 0.4);
-}
 
-.action-btn:active {
-  transform: translateY(0);
-}
 
 .action-icon {
-  width: 48px;
-  height: 48px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
+  /* background: rgba(255, 255, 255, 0.3); */
+  /* border-radius: 90%; */
+  
 }
 
 .action-icon svg {
-  stroke: white;
+  stroke: rgb(255, 255, 255);
 }
 
-.action-btn span {
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  color: white;
-}
+
 
 .transactions-section {
   background-color: var(--bg-white);

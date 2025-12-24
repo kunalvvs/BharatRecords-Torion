@@ -6,15 +6,15 @@ function MenuPage() {
   const navigate = useNavigate()
 
   const menuItems = [
-    { icon: '👤', label: 'My Account', color: '#FF9800', path: '/my-account' },
-    { icon: '📄', label: 'My Document', color: '#333', path: '/add-document' },
-    { icon: '📊', label: 'Report', color: '#4CAF50', path: '/reports' },
-    { icon: '⚙️', label: 'Setting', color: '#2196F3', path: '/setting' },
-    { icon: '🕒', label: 'Doc Share History', color: '#333', path: '/doc-share-history' },
-    { icon: '🎧', label: 'Help Center', color: '#FF9800', path: '/help-center' },
-    { icon: '🛡️', label: 'Privacy Policy', color: '#4CAF50', path: '/privacy-policy' },
-    { icon: '📝', label: 'Terms of Service', color: '#333', path: '/terms-of-service' },
-    { icon: '⚠️', label: 'Disclaimer', color: '#FDB913', path: '/disclaimer' }
+    { icon: '👤', label: 'My Account', path: '/my-account' },
+    { icon: '📄', label: 'My Document', path: '/add-document' },
+    { icon: '📊', label: 'Report', path: '/reports' },
+    { icon: '⚙️', label: 'Setting', path: '/setting' },
+    { icon: '🕒', label: 'Doc Share History', path: '/doc-share-history' },
+    { icon: '🎧', label: 'Help Center',  path: '/help-center' },
+    { icon: '🛡️', label: 'Privacy Policy', path: '/privacy-policy' },
+    { icon: '📝', label: 'Terms of Service',  path: '/terms-of-service' },
+    { icon: '⚠️', label: 'Disclaimer', path: '/disclaimer' }
   ]
 
   return (

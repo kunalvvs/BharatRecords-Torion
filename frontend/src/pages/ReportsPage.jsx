@@ -43,15 +43,15 @@ function ReportsPage() {
               <div className="pdf-icon">
                 <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
                   <rect width="80" height="80" rx="12" fill="#F0F0F0"/>
-                  <path d="M25 20h30l10 10v35a2 2 0 01-2 2H25a2 2 0 01-2-2V22a2 2 0 012-2z" fill="white" stroke="#ddd"/>
+                  <path d="M25 20h30l10 10v35a2 2 0 01-2 2H25a2 2 0 01-2-2V22a2 2 0 012-2z" fill="white" stroke="#dddddd49"/>
                   <text x="40" y="50" textAnchor="middle" fill="#E53935" fontSize="16" fontWeight="bold">PDF</text>
                 </svg>
               </div>
               <div className="document-info">
                 <div className="doc-name">Name : {doc.name}</div>
                 <div className="doc-date">Date : {doc.date}</div>
-              </div>
-              <div className="document-actions">
+
+                     <div className="document-actions">
                 <button className="action-btn">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M17 3l4 4-10 10H7v-4L17 3z" stroke="#3D1F8F" strokeWidth="2" fill="none"/>
@@ -68,6 +68,8 @@ function ReportsPage() {
                   </svg>
                 </button>
               </div>
+              </div> 
+         
             </div>
           ))}
         </div>

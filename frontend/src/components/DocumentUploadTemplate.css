@@ -25,7 +25,7 @@
 
 .page-header-purple h1 {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 500;
   flex: 1;
 }
 
@@ -131,7 +131,7 @@
 }
 
 .uploaded-doc-card {
-  background-color: #F5F5F5;
+  background-color: #b7b1b160;
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
   display: flex;
@@ -150,6 +150,7 @@
 
 .doc-info {
   flex: 1;
+ 
 }
 
 .doc-name {
@@ -167,6 +168,7 @@
 .doc-actions {
   display: flex;
   gap: var(--spacing-sm);
+  margin-top: 5px;
 }
 
 .action-btn-edit,

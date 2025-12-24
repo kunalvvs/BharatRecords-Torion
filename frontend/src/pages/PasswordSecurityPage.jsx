@@ -24,7 +24,7 @@ function PasswordSecurityPage() {
       <div className="password-content">
         <div className="logo-section">
           <img src="/Logo.png" alt="Bharat Records" className="app-logo" />
-          <p className="tagline">SMART WALLET FOR SMART PEOPLE</p>
+          {/* <p className="tagline">SMART WALLET FOR SMART PEOPLE</p> */}
         </div>
 
         <form className="password-form" onSubmit={handleSubmit}>

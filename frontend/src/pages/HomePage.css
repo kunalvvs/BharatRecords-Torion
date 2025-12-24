@@ -12,7 +12,8 @@
 }
 
 .home-logo {
-  max-width: 200px;
+  max-width: 250px;
+  margin-top: -35px;
   height: auto;
 }
 
@@ -26,6 +27,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--spacing-md);
+  margin-top: -20px;
 }
 
 .welcome-content {

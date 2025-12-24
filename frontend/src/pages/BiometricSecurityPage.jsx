@@ -11,7 +11,7 @@ function BiometricSecurityPage() {
       <div className="biometric-content">
         <div className="logo-section">
           <img src="/Logo.png" alt="Bharat Records" className="app-logo" />
-          <p className="tagline">SMART WALLET FOR SMART PEOPLE</p>
+          {/* <p className="tagline">SMART WALLET FOR SMART PEOPLE</p> */}
         </div>
 
         <h1 className="page-title">Bio Metric Security</h1>

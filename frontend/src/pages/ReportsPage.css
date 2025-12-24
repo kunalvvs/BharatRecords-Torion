@@ -71,7 +71,7 @@
 .document-card {
   background: #E8E8E8;
   border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
+  /* padding: var(--spacing-lg); */
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
@@ -79,6 +79,7 @@
 
 .pdf-icon {
   flex-shrink: 0;
+  padding-left: 15px;
 }
 
 .document-info {
@@ -100,6 +101,9 @@
 .document-actions {
   display: flex;
   gap: var(--spacing-sm);
+  margin: 15px 0;
+  justify-content: center;
+  align-items: center;
 }
 
 .action-btn {
