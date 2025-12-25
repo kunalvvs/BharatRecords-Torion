@@ -94,6 +94,9 @@
   padding: var(--spacing-lg) 0;
   text-align: center;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: var(--spacing-xl) 0;
 }
 
