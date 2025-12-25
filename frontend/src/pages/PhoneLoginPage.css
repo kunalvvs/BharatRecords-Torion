@@ -96,7 +96,7 @@
   background-color: #1565C0;
   color: white;
   border: none;
-  border-radius: 12px;
+  /* border-radius: 12px; */
   padding: var(--spacing-lg);
   font-size: 18px;
   font-weight: 700;

@@ -84,7 +84,7 @@ a {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: 428px) {
+@media (max-width: 3000px) {
   #root {
     max-width: 100%;
   }

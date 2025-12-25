@@ -10,7 +10,7 @@ function InvestmentPage() {
     { id: 3, name: 'Bank Deposits', icon: '🏦', path: '/investment/bank-deposits' },
     { id: 4, name: 'Mutual Fund', icon: '💰', path: '/investment/mutual-fund' },
     { id: 5, name: 'SIP', icon: '💵', path: '/investment/sip' },
-    { id: 6, name: 'DEMAT Details', icon: '📊', path: '/investment/demat' },
+    { id: 6, name: 'DEMAT Details', icon: '📊', path: '/investment/demat-details' },
     { id: 7, name: 'Other Investments', icon: '💎', path: '/investment/other' },
   ]
 

@@ -108,7 +108,7 @@
 
 .submit-button {
   padding: var(--spacing-lg);
-  background-color: var(--blue-card);
+background-color: var(--primary-purple);
   color: var(--text-white);
   border: none;
   border-radius: var(--radius-md);
