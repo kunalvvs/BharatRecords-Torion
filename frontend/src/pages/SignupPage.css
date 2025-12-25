@@ -27,6 +27,17 @@
   margin-bottom: var(--spacing-2xl);
 }
 
+.error-message {
+  background-color: #fee;
+  color: #c33;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: var(--spacing-md);
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #fcc;
+}
+
 .signup-form {
   display: flex;
   flex-direction: column;
@@ -80,6 +91,17 @@
 .btn-signup.active {
   background-color: #1565C0;
   cursor: pointer;
+}
+
+.google-login-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.google-login-wrapper > div {
+  width: 100% !important;
 }
 
 .login-link {

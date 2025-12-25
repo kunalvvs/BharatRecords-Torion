@@ -24,6 +24,16 @@
   margin-top: var(--spacing-3xl);
 }
 
+.error-message {
+  background-color: #fee;
+  color: #c33;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #fcc;
+}
+
 .otp-input-group {
   display: flex;
   flex-direction: column;
