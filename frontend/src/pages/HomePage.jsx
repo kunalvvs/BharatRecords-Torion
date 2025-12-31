@@ -1,9 +1,19 @@
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './HomePage.css'
 import BottomNav from '../components/BottomNav'
 
 function HomePage() {
   const navigate = useNavigate()
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    // Get user data from localStorage
+    const userData = localStorage.getItem('user')
+    if (userData) {
+      setUser(JSON.parse(userData))
+    }
+  }, [])
 
   const categories = [
     { id: 1, name: 'Personal Information', desc: 'Store your Aadhar, PAN, Passport, Voter, DL, etc', color: '#FDB913', icon: '👤', path: '/personal' },
@@ -20,8 +30,8 @@ function HomePage() {
 
       <div className="welcome-card">
         <div className="welcome-content">
-          <h2>Welcome,</h2>
-          <p className="client-id">Client ID :</p>
+          <h2>Welcome, {user?.fullName || 'Guest'}</h2>
+          <p className="client-id">Client ID: {user?.clientId || 'N/A'}</p>
           <p className="welcome-text">
             Bharat Record is your personal document repository, accessible anytime from anywhere with high security as per our Terms of service and Privacy policy
           </p>

@@ -91,7 +91,8 @@ export const sendOTP = async (emailOrMobile, purpose = 'verification') => {
       console.log(`🔜 SMS will be sent via Renflair API in production`);
     }
     
-    return true;
+    // Return OTP for development/testing (will be removed when SMS API is integrated)
+    return { success: true, otp: process.env.NODE_ENV === 'production' ? null : otp };
   } catch (error) {
     console.error('Error sending OTP:', error);
     throw error;

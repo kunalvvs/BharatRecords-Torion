@@ -12,13 +12,15 @@ function OTPPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   
-  // Get email from navigation state or session storage
+  // Get email OR mobile from navigation state or session storage
   const email = location.state?.email || sessionStorage.getItem('pendingEmail')
+  const mobile = location.state?.mobile || sessionStorage.getItem('pendingPhone')
+  const identifier = email || mobile // Use email or mobile as identifier
   const fromSignup = location.state?.from === 'signup'
 
   useEffect(() => {
-    // Redirect to login if no email
-    if (!email) {
+    // Redirect to login if no identifier
+    if (!identifier) {
       navigate('/login')
       return
     }
@@ -43,7 +45,7 @@ function OTPPage() {
     setError('')
 
     try {
-      const response = await authAPI.verifyOTP(email, otp)
+      const response = await authAPI.verifyOTP(identifier, otp)
       
       if (response.success) {
         // Store tokens and user data
@@ -53,6 +55,7 @@ function OTPPage() {
         
         // Clear session storage
         sessionStorage.removeItem('pendingEmail')
+        sessionStorage.removeItem('pendingPhone')
         sessionStorage.removeItem('signupEmail')
         
         alert(fromSignup ? 'Account verified successfully!' : 'Login successful!')
@@ -73,13 +76,13 @@ function OTPPage() {
     setError('')
 
     try {
-      // Resend OTP to email
-      await sendOTP(email, 'verification')
+      // Resend OTP to email or mobile
+      await sendOTP(identifier, 'verification')
       
       setTimer(56)
       setCanResend(false)
       setOtp('')
-      alert('OTP sent to your email!')
+      alert(email ? 'OTP sent to your email!' : 'OTP sent (check console for temp OTP)!')
     } catch (err) {
       console.error('Resend OTP error:', err)
       setError('Failed to resend OTP. Please try again.')
@@ -89,10 +92,10 @@ function OTPPage() {
   }
 
   // Helper function to resend OTP
-  const sendOTP = async (email, purpose) => {
+  const sendOTP = async (identifier, purpose) => {
     // This will trigger a new signup or login call
     // For now, just show success message
-    console.log(`Resending OTP to ${email}`)
+    console.log(`Resending OTP to ${identifier}`)
     return Promise.resolve()
   }
 

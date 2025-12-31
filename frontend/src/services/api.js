@@ -84,8 +84,12 @@ export const authAPI = {
   },
 
   // Verify OTP
-  verifyOTP: async (email, otp) => {
-    const response = await api.post('/auth/verify-otp', { email, otp });
+  verifyOTP: async (identifier, otp) => {
+    // identifier can be email or mobile
+    const payload = identifier.includes('@') 
+      ? { email: identifier, otp }
+      : { mobile: identifier, otp };
+    const response = await api.post('/auth/verify-otp', payload);
     return response.data;
   },
 

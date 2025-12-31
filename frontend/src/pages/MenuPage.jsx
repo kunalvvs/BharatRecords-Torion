@@ -1,9 +1,27 @@
 import { useNavigate } from 'react-router-dom'
 import BottomNav from '../components/BottomNav'
+import { authAPI } from '../services/api'
 import './MenuPage.css'
 
 function MenuPage() {
   const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    try {
+      // Call logout API
+      await authAPI.logout()
+    } catch (error) {
+      console.error('Logout error:', error)
+    } finally {
+      // Clear local storage
+      localStorage.removeItem('accessToken')
+      localStorage.removeItem('refreshToken')
+      localStorage.removeItem('user')
+      
+      // Redirect to login page
+      navigate('/login')
+    }
+  }
 
   const menuItems = [
     { icon: '👤', label: 'My Account', path: '/my-account' },
@@ -38,7 +56,7 @@ function MenuPage() {
           </div>
         ))}
 
-        <div className="menu-item logout-item">
+        <div className="menu-item logout-item" onClick={handleLogout}>
           <div className="menu-item-left">
             <div className="menu-icon logout-icon">
               <span>🔴</span>

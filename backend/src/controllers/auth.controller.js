@@ -166,14 +166,16 @@ export const phoneLogin = async (req, res) => {
     }
     
     // Send OTP
-    await sendOTP(mobile, 'login');
+    const otpResult = await sendOTP(mobile, 'login');
     
     res.json({
       status: 'success',
       message: 'OTP sent successfully',
       data: {
         userId: user._id,
-        mobile: user.mobile
+        mobile: user.mobile,
+        // Include OTP in development mode for testing (until SMS API is integrated)
+        ...(process.env.NODE_ENV !== 'production' && otpResult.otp && { otp: otpResult.otp })
       }
     });
   } catch (error) {
@@ -189,10 +191,18 @@ export const phoneLogin = async (req, res) => {
 // @access  Public
 export const verifyOTPAndLogin = async (req, res) => {
   try {
-    const { email, otp } = req.body;
+    const { email, mobile, otp } = req.body;
+    const identifier = email || mobile; // Accept either email or mobile
+    
+    if (!identifier) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email or mobile number is required'
+      });
+    }
     
     // Verify OTP
-    const isValidOTP = await verifyOTP(email, otp);
+    const isValidOTP = await verifyOTP(identifier, otp);
     
     if (!isValidOTP) {
       return res.status(400).json({
@@ -201,8 +211,10 @@ export const verifyOTPAndLogin = async (req, res) => {
       });
     }
     
-    // Find user
-    const user = await User.findOne({ email });
+    // Find user by email or mobile
+    const user = await User.findOne(
+      identifier.includes('@') ? { email: identifier } : { mobile: identifier }
+    );
     
     if (!user) {
       return res.status(404).json({
