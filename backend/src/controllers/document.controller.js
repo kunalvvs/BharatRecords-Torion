@@ -20,7 +20,7 @@ export const uploadDocument = async (req, res) => {
     const fileExt = path.extname(req.file.originalname).substring(1);
     const fileName = `${req.user._id}/${category}/${documentType}_${Date.now()}.${fileExt}`;
     
-    const s3Result = await uploadToS3(req.file.buffer, fileName, req.file.mimetype);
+    const s3Url = await uploadToS3(req.file.buffer, fileName, req.file.mimetype);
     
     // Create document record
     const document = await Document.create({
@@ -29,10 +29,10 @@ export const uploadDocument = async (req, res) => {
       documentType,
       title,
       fileName: req.file.originalname,
-      fileUrl: s3Result.url,
+      fileUrl: s3Url,
       fileType: fileExt,
       fileSize: req.file.size,
-      s3Key: s3Result.key,
+      s3Key: fileName,
       metadata: metadata ? JSON.parse(metadata) : {}
     });
     

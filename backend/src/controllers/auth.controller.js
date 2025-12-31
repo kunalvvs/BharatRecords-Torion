@@ -137,6 +137,9 @@ export const login = async (req, res) => {
           email: user.email,
           mobile: user.mobile,
           clientId: user.clientId,
+          dob: user.dob,
+          aadhaarNumber: user.aadhaarNumber,
+          panNumber: user.panNumber,
           profilePicture: user.profilePicture
         }
       }
@@ -248,6 +251,10 @@ export const verifyOTPAndLogin = async (req, res) => {
           fullName: user.fullName,
           email: user.email,
           mobile: user.mobile,
+          dob: user.dob,
+          aadhaarNumber: user.aadhaarNumber,
+          panNumber: user.panNumber,
+          profilePicture: user.profilePicture,
           avatar: user.avatar,
           subscriptionPlan: user.subscriptionPlan,
           referralCode: user.referralCode
@@ -354,32 +361,63 @@ export const googleAuth = async (req, res) => {
     const payload = ticket.getPayload();
     const { email, name, picture, sub: googleId } = payload;
 
-    // Check if user exists
-    let user = await User.findOne({ email });
+    // Check if user exists by email OR googleId
+    let user = await User.findOne({ $or: [{ email }, { googleId }] });
 
     if (!user) {
       // Create new user
-      user = await User.create({
-        fullName: name,
-        email,
-        mobile: '', // Will be added later by user
-        password: Math.random().toString(36).slice(-8), // Random password for OAuth users
-        profilePicture: picture,
-        googleId,
-        isEmailVerified: true, // Auto-verify for Google users
-        authProvider: 'google'
-      });
+      try {
+        user = await User.create({
+          fullName: name,
+          email,
+          mobile: '', // Will be added later by user
+          password: Math.random().toString(36).slice(-8), // Random password for OAuth users
+          profilePicture: picture,
+          googleId,
+          isEmailVerified: true, // Auto-verify for Google users
+          authProvider: 'google'
+        });
 
-      // Create wallet for new user
-      await Wallet.create({
-        user: user._id,
-        balance: 0
-      });
+        // Create wallet for new user
+        await Wallet.create({
+          user: user._id,
+          balance: 0
+        });
+      } catch (createError) {
+        // If user creation fails due to duplicate, try to find the existing user
+        if (createError.code === 11000) {
+          console.log('User already exists, fetching existing user...');
+          user = await User.findOne({ email });
+          if (!user) {
+            throw new Error('User creation failed and could not find existing user');
+          }
+          // Link Google ID to existing account
+          if (!user.googleId) {
+            user.googleId = googleId;
+            user.profilePicture = picture || user.profilePicture;
+            user.isEmailVerified = true;
+            await user.save();
+          }
+        } else {
+          throw createError;
+        }
+      }
     } else if (!user.googleId) {
       // Link existing account with Google
       user.googleId = googleId;
-      user.profilePicture = picture || user.profilePicture;
+      // Only set Google picture if user doesn't have a custom one
+      if (!user.profilePicture) {
+        user.profilePicture = picture;
+      }
       user.isEmailVerified = true;
+      await user.save();
+    } else {
+      // User exists and already linked with Google, just update last login
+      // Don't overwrite custom profile picture with Google's picture
+      // Only update if user has no profile picture or it's still a Google URL
+      if (!user.profilePicture || user.profilePicture.includes('googleusercontent.com')) {
+        user.profilePicture = picture || user.profilePicture;
+      }
       await user.save();
     }
 
@@ -412,6 +450,9 @@ export const googleAuth = async (req, res) => {
           fullName: user.fullName,
           email: user.email,
           mobile: user.mobile,
+          dob: user.dob,
+          aadhaarNumber: user.aadhaarNumber,
+          panNumber: user.panNumber,
           profilePicture: user.profilePicture,
           subscriptionPlan: user.subscriptionPlan,
           referralCode: user.referralCode

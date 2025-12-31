@@ -37,7 +37,29 @@ function HomePage() {
           </p>
         </div>
         <div className="user-avatar">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+          {user?.profilePicture ? (
+            <img 
+              src={user.profilePicture} 
+              alt="Profile" 
+              style={{
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                objectFit: 'cover'
+              }}
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextElementSibling.style.display = 'block';
+              }}
+            />
+          ) : null}
+          <svg 
+            width="60" 
+            height="60" 
+            viewBox="0 0 60 60" 
+            fill="none"
+            style={{ display: user?.profilePicture ? 'none' : 'block' }}
+          >
             <circle cx="30" cy="30" r="30" fill="#3D1F8F"/>
             <circle cx="30" cy="22" r="10" fill="white"/>
             <path d="M15 45C15 38 21 33 30 33C39 33 45 38 45 45" fill="white"/>

@@ -58,8 +58,14 @@ function OTPPage() {
         sessionStorage.removeItem('pendingPhone')
         sessionStorage.removeItem('signupEmail')
         
-        alert(fromSignup ? 'Account verified successfully!' : 'Login successful!')
-        navigate('/home')
+        // Redirect based on whether it's signup or login
+        if (fromSignup) {
+          alert('Account verified successfully! Please complete your profile.')
+          navigate('/my-account')
+        } else {
+          alert('Login successful!')
+          navigate('/home')
+        }
       }
     } catch (err) {
       console.error('OTP verification error:', err)

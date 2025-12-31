@@ -66,8 +66,8 @@ function SignupPage() {
         localStorage.setItem('refreshToken', response.data.refreshToken)
         localStorage.setItem('user', JSON.stringify(response.data.user))
         
-        alert('Google signup successful!')
-        navigate('/home')
+        alert('Google signup successful! Please complete your profile.')
+        navigate('/my-account')
       }
     } catch (err) {
       console.error('Google signup error:', err)

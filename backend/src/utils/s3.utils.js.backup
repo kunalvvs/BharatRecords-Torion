@@ -41,7 +41,7 @@ export const uploadToS3 = async (fileBuffer, fileName, mimeType) => {
     const bucketName = getBucketName();
     const client = getS3Client();
 
-    console.log('��� Uploading to S3:', {
+    console.log('📤 Uploading to S3:', {
       fileName,
       mimeType,
       bucketName,
@@ -54,7 +54,8 @@ export const uploadToS3 = async (fileBuffer, fileName, mimeType) => {
       Bucket: bucketName,
       Key: fileName,
       Body: fileBuffer,
-      ContentType: mimeType
+      ContentType: mimeType,
+      ServerSideEncryption: 'AES256'
     };
     
     const command = new PutObjectCommand(params);
@@ -63,7 +64,7 @@ export const uploadToS3 = async (fileBuffer, fileName, mimeType) => {
     const url = `https://${bucketName}.s3.${process.env.AWS_REGION}.amazonaws.com/${fileName}`;
     console.log('✅ S3 Upload successful:', url);
     
-    return url;
+    return url; // Return URL string directly
   } catch (error) {
     console.error('S3 Upload Error:', error);
     console.error('Error details:', {
@@ -75,10 +76,7 @@ export const uploadToS3 = async (fileBuffer, fileName, mimeType) => {
   }
 };
 
-// @desc    Delete file from S3
-export const deleteFromS3 = async (fileKey) => {
-  try {
-    const bucketName = getBucketName();
+// @desc  bucketName = getBucketName();
     const client = getS3Client();
 
     const params = {
@@ -87,7 +85,10 @@ export const deleteFromS3 = async (fileKey) => {
     };
     
     const command = new DeleteObjectCommand(params);
-    await client.send(command);
+    await c
+    
+    const command = new DeleteObjectCommand(params);
+    await s3Client.send(command);
     
     return true;
   } catch (error) {
@@ -99,17 +100,15 @@ export const deleteFromS3 = async (fileKey) => {
 // @desc    Get signed URL for file access
 export const getSignedUrl = async (fileKey, expiresIn = 3600) => {
   try {
-    const bucketName = getBucketName();
-    const client = getS3Client();
-
-    const command = new GetObjectCommand({
-      Bucket: bucketName,
+    const params = {
+      Bucket: BUCKET_NAME,
       Key: fileKey
-    });
+    };
     
-    const url = await getS3SignedUrl(client, command, { expiresIn });
+    const command = new GetObjectCommand(params);
+    const signedUrl = await getS3SignedUrl(s3Client, command, { expiresIn });
     
-    return url;
+    return signedUrl;
   } catch (error) {
     console.error('S3 Signed URL Error:', error);
     throw new Error('Failed to generate signed URL');

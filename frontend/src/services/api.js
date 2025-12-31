@@ -122,7 +122,11 @@ export const userAPI = {
 
   // Update profile
   updateProfile: async (data) => {
-    const response = await api.put('/users/profile', data);
+    // If data is FormData, don't set Content-Type (let browser set it with boundary)
+    const config = data instanceof FormData ? {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    } : {};
+    const response = await api.put('/users/profile', data, config);
     return response.data;
   },
 
