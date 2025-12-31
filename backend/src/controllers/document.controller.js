@@ -230,3 +230,39 @@ export const getDocumentStats = async (req, res) => {
     });
   }
 };
+
+// @desc    Get signed URL for document download
+// @route   GET /api/documents/:id/download
+// @access  Private
+export const getDocumentDownloadUrl = async (req, res) => {
+  try {
+    const document = await Document.findOne({
+      _id: req.params.id,
+      user: req.user._id,
+      isDeleted: false
+    });
+    
+    if (!document) {
+      return res.status(404).json({
+        status: 'error',
+        message: 'Document not found'
+      });
+    }
+    
+    // Generate signed URL valid for 1 hour
+    const signedUrl = await getSignedUrl(document.s3Key, 3600);
+    
+    res.json({
+      status: 'success',
+      data: { 
+        signedUrl,
+        fileName: document.fileName
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      message: error.message
+    });
+  }
+};

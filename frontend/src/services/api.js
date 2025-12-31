@@ -189,6 +189,12 @@ export const documentAPI = {
     const response = await api.get('/documents/stats/categories');
     return response.data;
   },
+
+  // Get download URL
+  getDownloadUrl: async (id) => {
+    const response = await api.get(`/documents/${id}/download`);
+    return response.data;
+  },
 };
 
 // Wallet APIs

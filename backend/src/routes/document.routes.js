@@ -6,7 +6,8 @@ import {
   getDocumentById,
   updateDocument,
   deleteDocument,
-  getDocumentStats
+  getDocumentStats,
+  getDocumentDownloadUrl
 } from '../controllers/document.controller.js';
 import { protect } from '../middleware/auth.middleware.js';
 
@@ -38,6 +39,7 @@ router.post('/upload', upload.single('document'), uploadDocument);
 router.get('/', getDocuments);
 router.get('/stats/categories', getDocumentStats);
 router.get('/:id', getDocumentById);
+router.get('/:id/download', getDocumentDownloadUrl);
 router.put('/:id', updateDocument);
 router.delete('/:id', deleteDocument);
 
