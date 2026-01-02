@@ -113,15 +113,30 @@ const documentSchema = new mongoose.Schema({
     
     // Insurance
     policyNumber: String,
+    policyNo: String,
+    typeOfInsurance: String,
+    insuranceCompany: String,
+    beneficiary: String,
+    addNominee: Boolean,
     premiumAmount: Number,
     coverageAmount: Number,
     policyTerm: String,
     
     // Loans
+    fullName: String,
+    loanTakenFrom: String,
+    typeOfLoan: String,
     loanAmount: Number,
     interestRate: Number,
     tenureMonths: Number,
     emiAmount: Number,
+    
+    // Retirement
+    typeOfDues: String,
+    pfAccountNo: String,
+    employerName: String,
+    employerAddress: String,
+    employerContact: String,
     
     // General
     remarks: String

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { documentAPI } from '../services/api'
 import './DocumentUploadTemplate.css'
 
-function InvestmentDocumentUploadTemplate({ title, icon, documentType, formFields }) {
+function InvestmentDocumentUploadTemplate({ title, icon, documentType, formFields, category = 'investment' }) {
   const navigate = useNavigate()
   const [uploadedDocs, setUploadedDocs] = useState([])
   const [selectedFile, setSelectedFile] = useState(null)
@@ -28,7 +28,7 @@ function InvestmentDocumentUploadTemplate({ title, icon, documentType, formField
 
   const loadDocuments = async () => {
     try {
-      const response = await documentAPI.getAll('investment', documentType)
+      const response = await documentAPI.getAll(category, documentType)
       if (response.status === 'success') {
         setUploadedDocs(response.data.documents)
       }
@@ -71,7 +71,7 @@ function InvestmentDocumentUploadTemplate({ title, icon, documentType, formField
     try {
       const uploadFormData = new FormData()
       uploadFormData.append('document', selectedFile)
-      uploadFormData.append('category', 'investment')
+      uploadFormData.append('category', category)
       uploadFormData.append('documentType', documentType)
       uploadFormData.append('title', `${title} - ${new Date().toLocaleDateString()}`)
       uploadFormData.append('metadata', JSON.stringify(formData))
