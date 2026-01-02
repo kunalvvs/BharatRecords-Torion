@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import BottomNav from '../components/BottomNav'
 import { authAPI } from '../services/api'
 import './MenuPage.css'
+import { useEffect } from 'react'
+
 
 function MenuPage() {
   const navigate = useNavigate()
@@ -34,6 +36,11 @@ function MenuPage() {
     { icon: '📝', label: 'Terms of Service',  path: '/terms-of-service' },
     { icon: '⚠️', label: 'Disclaimer', path: '/disclaimer' }
   ]
+
+
+  useEffect(() => {
+  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+}, []);
 
   return (
     <div className="menu-page">
