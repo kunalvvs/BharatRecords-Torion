@@ -50,6 +50,7 @@ import DocShareHistoryPage from './pages/DocShareHistoryPage'
 import HelpCenterPage from './pages/HelpCenterPage'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
 import TermsOfServicePage from './pages/TermsOfServicePage'
+import { useEffect } from 'react'
 
 function App() {
   return (

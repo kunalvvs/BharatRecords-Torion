@@ -66,11 +66,65 @@ const documentSchema = new mongoose.Schema({
     default: Date.now
   },
   metadata: {
+    // General metadata
     documentNumber: String,
     issueDate: Date,
     expiryDate: Date,
     issuingAuthority: String,
-    description: String
+    description: String,
+    
+    // Investment-specific metadata
+    // Mutual Fund & SIP
+    mutualFundType: String,
+    dmatAccount: String,
+    brokerName: String,
+    companyName: String,
+    beneficiary: String,
+    addNominee: Boolean,
+    fundName: String,
+    sipAmount: Number,
+    startDate: String,
+    endDate: String,
+    frequency: String,
+    bankAccount: String,
+    
+    // Bank Deposits
+    accountNumber: String,
+    ifscCode: String,
+    depositType: String,
+    
+    // Demat Details
+    emailLinked: Boolean,
+    mobileLinked: Boolean,
+    
+    // Real Estate
+    coOwner: String,
+    will: String,
+    address: String,
+    propertyType: String,
+    position: String,
+    
+    // Post Office
+    branchAddress: String,
+    accountType: String,
+    
+    // Other Investment
+    investmentName: String,
+    
+    // Insurance
+    policyNumber: String,
+    premiumAmount: Number,
+    coverageAmount: Number,
+    policyTerm: String,
+    
+    // Loans
+    loanAmount: Number,
+    interestRate: Number,
+    tenureMonths: Number,
+    emiAmount: Number,
+    
+    // General
+    remarks: String
   },
   isVerified: {
     type: Boolean,

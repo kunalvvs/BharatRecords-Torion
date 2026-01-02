@@ -134,6 +134,10 @@
   display: flex;
   justify-content: center;
   margin-bottom: var(--spacing-md);
+  /* border: 2px solid rgb(233, 217, 217);
+  border-radius: 15px;
+  background-color: #fcc; */
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.155);
 }
 
 .google-login-wrapper > div {
@@ -143,7 +147,7 @@
 .btn-google,
 .btn-phone {
   padding: var(--spacing-lg);
-  background-color: #F5F5F5;
+  background-color: #bdb7b774;
   color: var(--text-primary);
   font-size: 16px;
   font-weight: 500;
@@ -152,6 +156,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-md);
+   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.155);
 }
 
 .signup-link {

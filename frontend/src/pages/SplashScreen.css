@@ -64,21 +64,25 @@
 }
 
 .splash-logo {
-  max-width: 250px;
+  max-width: 100%;
   height: auto;
+  margin-top: -150px;
 }
 
 .splash-shield {
   display: flex;
   align-items: center;
+ 
   justify-content: center;
-  margin: var(--spacing-2xl) 0;
+  /* margin: var(--spacing-2xl) 0; */
+  margin-top: -50px;
   animation: scaleIn 0.8s ease-out 0.5s both, pulse 2s ease-in-out 1.3s infinite;
 }
 
 .splash-icon {
-  width: 220px;
-  height: 220px;
+  margin-top: -60px;
+  width: 83%;
+  height: 83%;
   object-fit: contain;
 }
 

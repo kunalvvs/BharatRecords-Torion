@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import './PersonalPage.css'
+import { useEffect } from 'react'
 
 function PersonalPage() {
   const navigate = useNavigate()
@@ -24,6 +25,10 @@ function PersonalPage() {
     { id: 4, name: 'Debit / Credit Cards', icon: '💳', path: '/personal/debit-credit-cards' },
     { id: 5, name: 'Medical Records', icon: '🏥', path: '/personal/medical-records' },
   ]
+  
+  useEffect(() => {
+  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+}, []);
 
   return (
     <div className="personal-page">

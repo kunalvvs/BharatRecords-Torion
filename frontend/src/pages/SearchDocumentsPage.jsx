@@ -14,7 +14,7 @@ function SearchDocumentsPage() {
   return (
     <div className="search-documents-page">
       <div className="page-header">
-        <h1>Search Documnets 🔍</h1>
+        <h1>Search Documents 🔍</h1>
       </div>
 
       <div className="search-content">

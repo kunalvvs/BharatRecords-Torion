@@ -167,10 +167,11 @@
 }
 
 .news-banner {
-  background: linear-gradient(90deg, #FDB913 0%, #FFFEF0 100%);
+  /* background: linear-gradient(90deg, #FDB913 0%, #FFFEF0 100%); */
   border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
+  /* padding: var(--spacing-xl); */
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: var(--spacing-lg);
   overflow: hidden;
@@ -181,8 +182,10 @@
 }
 
 .news-text {
-  flex: 1;
-  text-align: left;
+  /* flex: 1; */
+  /* text-align: left; */
+  width: 100%;
+  /* height: 120%; */
 }
 
 .news-text h4 {

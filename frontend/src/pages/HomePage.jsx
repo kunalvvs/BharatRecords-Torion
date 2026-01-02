@@ -111,15 +111,15 @@ function HomePage() {
         <h3>What's new</h3>
         <div className="news-banner">
           <div className="news-illustration">
-            <img src="/news-illustration.svg" alt="News" />
+            <img src="/Homebottom.jpg" className='news-text' alt="News" />
           </div>
-          <div className="news-text">
+          {/* <div className="news-text">
             <h4>THE BEST</h4>
             <h4>CHOICE FOR</h4>
             <h4><span className="highlight-storing">STORING</span></h4>
             <h4><span className="highlight-your">YOUR</span></h4>
             <h4><span className="highlight-valuables">VALUABLES</span></h4>
-          </div>
+          </div> */}
         </div>
       </div>
 
