@@ -21,8 +21,7 @@ const userSchema = new mongoose.Schema({
   },
   mobile: {
     type: String,
-    trim: true,
-    default: ''
+    trim: true
   },
   password: {
     type: String,
@@ -125,8 +124,20 @@ const userSchema = new mongoose.Schema({
 // Generate client ID before save
 userSchema.pre('save', async function(next) {
   if (!this.clientId) {
-    const count = await mongoose.model('User').countDocuments();
-    this.clientId = `BR${String(count + 10001).padStart(6, '0')}`;
+    try {
+      // Find the last clientId and increment
+      const lastUser = await mongoose.model('User').findOne({}, { clientId: 1 }).sort({ clientId: -1 }).limit(1);
+      
+      if (lastUser && lastUser.clientId) {
+        const lastNumber = parseInt(lastUser.clientId.replace('BR', ''));
+        this.clientId = `BR${String(lastNumber + 1).padStart(6, '0')}`;
+      } else {
+        this.clientId = `BR010001`;
+      }
+    } catch (error) {
+      // Fallback to timestamp-based unique ID if there's an error
+      this.clientId = `BR${Date.now().toString().slice(-6)}`;
+    }
   }
   
   if (!this.referralCode) {

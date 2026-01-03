@@ -26,15 +26,25 @@ export const signup = async (req, res) => {
   try {
     const { fullName, mobile, email, password, referralCode } = req.body;
     
+    // Validate required fields
+    if (!fullName || !email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Full name, email, and password are required'
+      });
+    }
+    
     // Check if user already exists
     const existingUser = await User.findOne({
-      $or: [{ email }, { mobile }]
+      $or: [{ email }, ...(mobile ? [{ mobile }] : [])]
     });
     
     if (existingUser) {
       return res.status(400).json({
-        status: 'error',
-        message: 'User with this email or mobile already exists'
+        success: false,
+        message: existingUser.email === email 
+          ? 'User with this email already exists' 
+          : 'User with this mobile number already exists'
       });
     }
     
@@ -49,13 +59,19 @@ export const signup = async (req, res) => {
     }
     
     // Create user
-    const user = await User.create({
+    const userData = {
       fullName,
-      mobile,
       email,
       password,
       referredBy: referredByUser?._id
-    });
+    };
+    
+    // Only add mobile if provided
+    if (mobile) {
+      userData.mobile = mobile;
+    }
+    
+    const user = await User.create(userData);
     
     // Create wallet for user
     await Wallet.create({
@@ -71,14 +87,26 @@ export const signup = async (req, res) => {
       message: 'User registered successfully. OTP sent to your email.',
       data: {
         userId: user._id,
+        clientId: user.clientId,
         mobile: user.mobile,
         email: user.email
       }
     });
   } catch (error) {
+    console.error('Signup error:', error);
+    
+    // Handle duplicate key errors
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyPattern)[0];
+      return res.status(400).json({
+        success: false,
+        message: `A user with this ${field} already exists`
+      });
+    }
+    
     res.status(500).json({
       success: false,
-      message: error.message
+      message: error.message || 'Registration failed. Please try again.'
     });
   }
 };
@@ -353,12 +381,21 @@ export const googleAuth = async (req, res) => {
     }
 
     // Verify Google token
-    const ticket = await googleClient.verifyIdToken({
-      idToken: credential,
-      audience: process.env.GOOGLE_CLIENT_ID,
-    });
+    let payload;
+    try {
+      const ticket = await googleClient.verifyIdToken({
+        idToken: credential,
+        audience: process.env.GOOGLE_CLIENT_ID,
+      });
+      payload = ticket.getPayload();
+    } catch (verifyError) {
+      console.error('Google token verification failed:', verifyError);
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid Google credential'
+      });
+    }
 
-    const payload = ticket.getPayload();
     const { email, name, picture, sub: googleId } = payload;
 
     // Check if user exists by email OR googleId
@@ -370,7 +407,6 @@ export const googleAuth = async (req, res) => {
         user = await User.create({
           fullName: name,
           email,
-          mobile: '', // Will be added later by user
           password: Math.random().toString(36).slice(-8), // Random password for OAuth users
           profilePicture: picture,
           googleId,
@@ -384,12 +420,17 @@ export const googleAuth = async (req, res) => {
           balance: 0
         });
       } catch (createError) {
+        console.error('User creation error:', createError);
+        
         // If user creation fails due to duplicate, try to find the existing user
         if (createError.code === 11000) {
-          console.log('User already exists, fetching existing user...');
+          console.log('Duplicate detected, fetching existing user...');
           user = await User.findOne({ email });
           if (!user) {
-            throw new Error('User creation failed and could not find existing user');
+            return res.status(500).json({
+              success: false,
+              message: 'Account already exists. Please try logging in again.'
+            });
           }
           // Link Google ID to existing account
           if (!user.googleId) {
@@ -468,7 +509,7 @@ export const googleAuth = async (req, res) => {
     console.error('Google auth error:', error);
     res.status(500).json({
       success: false,
-      message: 'Google authentication failed'
+      message: error.message || 'Google authentication failed. Please try again.'
     });
   }
 };

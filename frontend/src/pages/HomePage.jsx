@@ -22,6 +22,12 @@ function HomePage() {
     { id: 4, name: 'Loans', desc: 'Store your various Loan Documents', color: '#F44336', icon: '💰', path: '/loans' },
   ]
 
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, []);
+
+  
   return (
     <div className="home-page">
       <div className="home-header">
